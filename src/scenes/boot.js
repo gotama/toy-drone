@@ -1,16 +1,27 @@
+/**
+ * Entry point to set keys on the [Phaser.Data.DataManager]
+ */
 export default class Boot extends Phaser.Scene {
+    /**
+     * Construct boot
+     */
     constructor() {
         super('boot');
     }
 
+    /**
+     * Do nothing atm
+     */
     preload() {
-        // this.load.setPath('assets/games/germs/');
-        // this.load.image('background', 'background.png');
-        // this.load.bitmapFont('slime', 'slime-font.png', 'slime-font.xml');
+        console.log('Booting...');
     }
 
+    /**
+     * Set bulletscore key then start preloader
+     */
     create() {
-        // this.registry.set('highscore', 0);
+        // TODO finish state manangement
+        this.registry.set('bulletscore', 0);
 
         this.scene.start('preloader');
     }

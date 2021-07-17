@@ -1,14 +1,12 @@
 # Toy Drone
 
-A Phaser 3 project template with ES6 support via [Babel 7](https://babeljs.io/) and [Webpack 4](https://webpack.js.org/) that includes hot-reloading for development and production-ready builds.
+A Phaser 3 project Toy Drone game with ES6 support via [Babel 7](https://babeljs.io/) and [Webpack 4](https://webpack.js.org/) that includes hot-reloading for development and production-ready builds.
 
 This has been updated for Phaser 3.50.0 version and above.
 
-Loading images via JavaScript module `import` is also supported, although not recommended.
-
 ## Requirements
 
-[Node.js](https://nodejs.org) is required to install dependencies and run scripts via `npm`.
+[Node.js v12.22.3](https://nodejs.org) is required to install dependencies and run scripts via `npm`.
 
 ## Available Commands
 
@@ -17,6 +15,7 @@ Loading images via JavaScript module `import` is also supported, although not re
 | `npm install` | Install project dependencies |
 | `npm start` | Build project and open web server running project |
 | `npm run build` | Builds code bundle with production settings (minification, uglification, etc..) |
+| `npm run lint` | Runs the EsLint commans `--ignore-pattern node_modules/` |
 
 ## Writing Code
 
@@ -24,19 +23,6 @@ After cloning the repo, run `npm install` from your project directory. Then, you
 
 After starting the development server with `npm start`, you can edit any files in the `src` folder and webpack will automatically recompile and reload your server (available at `http://localhost:8080` by default).
 
-## Customizing the Template
-
-### Babel
-
-You can write modern ES6+ JavaScript and Babel will transpile it to a version of JavaScript that you want your project to support. The targeted browsers are set in the `.babelrc` file and the default currently targets all browsers with total usage over "0.25%" but excludes IE11 and Opera Mini.
-
- ```
-"browsers": [
-  ">0.25%",
-  "not ie 11",
-  "not op_mini all"
-]
- ```
 
 ### Webpack
 

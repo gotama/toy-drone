@@ -1,45 +1,37 @@
-class DroneSprite extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y) {
-        super(scene, x, y, 'black_drone');
+/**
+ * Drone
+ */
+export default class Drone extends Phaser.Physics.Arcade.Image {
+    /**
+     * @param  {Phaser.Scene} scene
+     * @param  {number} x
+     * @param  {number} y
+     * @param {string} textureKey
+     */
+    constructor(scene, x, y, textureKey) {
+        super(scene, x, y, textureKey);
+
+        scene.add.existing(this);
+
+        this.x = 8 + 16 + 32;
+        this.y = 8 + 16 + 32;
+
+        this.activateDrone(false);
     }
 
-    fire(x, y) {
-        this.body.reset(x, y);
-
-        this.setActive(true);
-        this.setVisible(true);
-
-        this.setVelocityY(-300);
+    /**
+     * @param  {boolean} on
+     */
+    activateDrone(on) {
+        this.setActive(on);
+        this.setVisible(on);
     }
 
-    preUpdate(time, delta) {
-        super.preUpdate(time, delta);
-
-        if (this.y <= -32) {
-            this.setActive(false);
-            this.setVisible(false);
-        }
-    }
-}
-
-export default class Drones extends Phaser.Physics.Arcade.Group {
-    constructor(scene) {
-        super(scene.physics.world, scene);
-
-        this.createMultiple({
-            frameQuantity: 2,
-            key: 'drones',
-            active: false,
-            visible: false,
-            classType: DroneSprite
-        });
-    }
-
-    fireBullet(x, y) {
-        let bullet = this.getFirstDead(false);
-
-        if (bullet) {
-            bullet.fire(x, y);
-        }
+    /**
+     * @param  {number} angleTo
+     * @return {number}
+     */
+    getRotateAngle(angleTo) {
+        return this.angle + angleTo;
     }
 }

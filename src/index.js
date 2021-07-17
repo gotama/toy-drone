@@ -8,9 +8,7 @@ const config = {
     type: Phaser.AUTO,
     physics: {
         default: 'arcade',
-        arcade: {
-            gravitiy: { y: 0 }
-        }
+        arcade: { debug: false },
     },
     backgroundColor: '#FFDB6B',
     scene: [Boot, Preloader, Game],
@@ -19,8 +17,9 @@ const config = {
         parent: 'toy-drone',
         autoCenter: Phaser.Scale.CENTER_BOTH,
         width: 400,
-        height: 720
+        height: 720,
     },
 };
 
+// eslint-disable-next-line no-unused-vars
 const game = new Phaser.Game(config);
