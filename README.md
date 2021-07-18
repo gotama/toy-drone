@@ -45,9 +45,10 @@ After starting the development server with `npm start`, you can edit any files i
 - [x] Visually Indicate all buttons are disabled until place is complete
 - [ ] HTML loading screen while waiting for JS
 - [x] Update README with production link
-- [ ] Add zip file to github releases with version 1
+- [x] Add zip file to github releases with version 1
 - [ ] Bullet Score
 - [ ] Splash Screen Scene
+- [ ] HTML / CSS loader for Hugo while waiting for JS to download.
 - [ ] [Reduce](https://medium.com/@louigi.verona/reducing-phasers-filesize-custom-phaser-builds-4a0314819a38) phaser.js lib size  
 
 ### Webpack
