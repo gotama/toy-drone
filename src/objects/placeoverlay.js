@@ -20,6 +20,13 @@ export default class PlaceOverlay extends Phaser.GameObjects.Container {
         scene.input.on('drag', (pointer, gameObject, dragX, dragY) => {
             gameObject.x = dragX;
             gameObject.y = dragY;
+            if (gameObject.x < 40 || gameObject.x > (this.background.width - scene.targetOffset)) {
+                scene.console.updatePlaceButton(1);
+            } else if (gameObject.y < 40 || gameObject.y > (this.background.height - scene.targetOffset)) {
+                scene.console.updatePlaceButton(1);
+            } else {
+                scene.console.updatePlaceButton(0);
+            }
         });
         this.activateOverlay(false);
     }

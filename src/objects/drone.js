@@ -50,4 +50,39 @@ export default class Drone extends Phaser.Physics.Arcade.Image {
         }
         return angleToReturn;
     }
+
+    /**
+     * Checks one tile forward to confirm forward movement
+     * @param  {number} tilesForward
+     * @return {boolean}
+     */
+    checkForward(tilesForward) {
+        let xMove = this.x;
+        let yMove = this.y;
+        const modifier = this.scene.tileSize * tilesForward;
+
+        switch (this.angle) {
+        case 0:
+            yMove -= modifier;
+            break;
+        case 90:
+            xMove += modifier;
+            break;
+        case -180:
+            yMove += modifier;
+            break;
+        case -90:
+            xMove -= modifier;
+            break;
+        }
+
+        const targetTile = this.scene.world.getTileAtXY(xMove, yMove);
+        if (targetTile && !targetTile.canCollide) {
+            console.log(`angle: ${this.angle} - xMove: ${xMove} - yMove: ${yMove} TRUE`);
+            return true;
+        } else {
+            console.log(`angle: ${this.angle} - xMove: ${xMove} - yMove: ${yMove} FALSE`);
+            return false;
+        }
+    }
 }

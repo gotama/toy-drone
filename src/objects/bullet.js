@@ -101,8 +101,8 @@ export default class Bullets extends Phaser.Physics.Arcade.Group {
         const bullet = this.getFirstDead(false);
 
         if (bullet) {
-            bullet.targetPixelX = targetPixelX + 24;
-            bullet.targetPixelY = targetPixelY + 24;
+            bullet.targetPixelX = targetPixelX + this.scene.targetOffset;
+            bullet.targetPixelY = targetPixelY + this.scene.targetOffset;
 
             switch (droneAngle) {
             case 0:

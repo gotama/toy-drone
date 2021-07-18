@@ -1,12 +1,14 @@
 # Toy Drone
 
-A Phaser 3 project Toy Drone game with ES6 support via [Babel 7](https://babeljs.io/) and [Webpack 4](https://webpack.js.org/) that includes hot-reloading for development and production-ready builds.
+This is my first game built in Phaser 3, a vast library with loads of examples.  Definitely an enjoyable experience using the power of JavaScript.
 
-This has been updated for Phaser 3.50.0 version and above.
+I am hosting the production build [here](https://rundun.co.za/game)
 
 ## Requirements
 
 [Node.js v12.22.3](https://nodejs.org) is required to install dependencies and run scripts via `npm`.
+
+TODO The production build will have a custom compiled version of phaser
 
 ## Available Commands
 
@@ -23,6 +25,27 @@ After cloning the repo, run `npm install` from your project directory. Then, you
 
 After starting the development server with `npm start`, you can edit any files in the `src` folder and webpack will automatically recompile and reload your server (available at `http://localhost:8080` by default).
 
+## TODO
+- [x] Add Text Console
+    - [ ] Report Card
+    - [ ] Place Values
+    - [ ] Move errors
+    - [ ] Attack errors
+    - [ ] Place errors
+- [ ] Change origin 0,0 to south west corner
+- [ ] Add Explosion
+- [ ] Forward Button
+- [ ] Rotate Buttons
+- [ ] Place Button
+- [ ] Attack Button
+- [ ] Report Button
+- [ ] Visually Indicate all buttons are disabled until place is complete
+- [ ] HTML loading screen while waiting for JS
+- [ ] Update README with production link
+- [ ] Add zip file to github releases with version 1
+- [ ] Bullet Score
+- [ ] Splash Screen Scene
+- [ ] [Reduce](https://medium.com/@louigi.verona/reducing-phasers-filesize-custom-phaser-builds-4a0314819a38) phaser.js lib size  
 
 ### Webpack
 
