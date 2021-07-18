@@ -12,11 +12,10 @@ export default class Drone extends Phaser.Physics.Arcade.Image {
         super(scene, x, y, textureKey);
 
         scene.add.existing(this);
-
         this.x = 8 + 16 + 32;
         this.y = 8 + 16 + 32;
-
         this.activateDrone(false);
+        this.heading = 'NORTH';
     }
 
     /**
@@ -32,6 +31,23 @@ export default class Drone extends Phaser.Physics.Arcade.Image {
      * @return {number}
      */
     getRotateAngle(angleTo) {
-        return this.angle + angleTo;
+        const angleToReturn = this.angle + angleTo;
+        switch (angleToReturn) {
+        case 0:
+            this.heading = 'NORTH';
+            break;
+        case 90:
+        case -270:
+            this.heading = 'EAST';
+            break;
+        case 180:
+        case -180:
+            this.heading = 'SOUTH';
+            break;
+        case -90:
+            this.heading = 'WEST';
+            break;
+        }
+        return angleToReturn;
     }
 }

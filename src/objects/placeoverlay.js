@@ -17,7 +17,10 @@ export default class PlaceOverlay extends Phaser.GameObjects.Container {
         this.drone = new Drone(scene, 0, 0, 'yellow_drone');
         this.drone.setInteractive();
         scene.input.setDraggable(this.drone);
-
+        scene.input.on('drag', (pointer, gameObject, dragX, dragY) => {
+            gameObject.x = dragX;
+            gameObject.y = dragY;
+        });
         this.activateOverlay(false);
     }
 
