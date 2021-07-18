@@ -12,8 +12,17 @@ class BulletSprite extends Phaser.Physics.Arcade.Sprite {
 
         this.targetPixelX = 0;
         this.targetPixelY = 0;
-        this.bulletSpeed = 56;
+        this.bulletSpeed = 100;
         this.heading = 'NORTH';
+
+        this.scene.anims.create({
+            key: 'explode',
+            frames: 'boom',
+            frameRate: 20,
+            repeat: 0,
+        });
+        this.boom = this.scene.add.sprite(200, 300, 'boom');
+        this.activateExplosion(false);
     }
 
     /**
@@ -37,7 +46,30 @@ class BulletSprite extends Phaser.Physics.Arcade.Sprite {
     }
 
     /**
-     * Update bullet lifecycle
+     * @param  {boolean} on
+     */
+    activateExplosion(on) {
+        this.boom.setActive(on);
+        this.boom.setVisible(on);
+    }
+
+    /**
+     * Fire up this bad boy!
+     * @param  {number} x
+     * @param  {number} y
+     * @param  {boolean} bulletOn
+     * @param  {boolean} explosionOn
+     */
+    animateExplosion(x, y, bulletOn, explosionOn) {
+        this.boom.x = x;
+        this.boom.y = y;
+        this.activateExplosion(explosionOn);
+        this.boom.play('explode');
+        this.activateBullet(bulletOn);
+    }
+
+    /**
+     * Update bullet lifecycle to calculate when bullet end of life is
      * @param  {number} time
      * @param  {delta} delta
      */
@@ -47,22 +79,22 @@ class BulletSprite extends Phaser.Physics.Arcade.Sprite {
         switch (this.heading) {
         case 'NORTH':
             if (this.y <= this.targetPixelY) {
-                this.activateBullet(false);
+                this.animateExplosion(this.x, this.y, false, true);
             }
             break;
         case 'EAST':
             if (this.x >= this.targetPixelX) {
-                this.activateBullet(false);
+                this.animateExplosion(this.x, this.y, false, true);
             }
             break;
         case 'SOUTH':
             if (this.y >= this.targetPixelY) {
-                this.activateBullet(false);
+                this.animateExplosion(this.x, this.y, false, true);
             }
             break;
         case 'WEST':
             if (this.x <= this.targetPixelX) {
-                this.activateBullet(false);
+                this.animateExplosion(this.x, this.y, false, true);
             }
             break;
         }
@@ -70,7 +102,7 @@ class BulletSprite extends Phaser.Physics.Arcade.Sprite {
 }
 
 /**
- * Bullets
+ * Bullets group to contain five bullets.
  */
 export default class Bullets extends Phaser.Physics.Arcade.Group {
     /**
@@ -90,7 +122,7 @@ export default class Bullets extends Phaser.Physics.Arcade.Group {
     }
 
     /**
-     * fireBullets relative to the drone
+     * fireBullets relative to the drone to a specified x and y target
      * @param  {number} startX
      * @param  {number} startY
      * @param {number} droneAngle
@@ -103,7 +135,6 @@ export default class Bullets extends Phaser.Physics.Arcade.Group {
         if (bullet) {
             bullet.targetPixelX = targetPixelX + this.scene.targetOffset;
             bullet.targetPixelY = targetPixelY + this.scene.targetOffset;
-
             switch (droneAngle) {
             case 0:
                 bullet.angle = 90;

@@ -14,6 +14,10 @@ export default class Drone extends Phaser.Physics.Arcade.Image {
         scene.add.existing(this);
         this.x = 8 + 16 + 32;
         this.y = 8 + 16 + 32;
+
+        // TODO add propellors to drone
+        // this.topLeftProp = this.add.image(this.x - 12, this.y - 10, 'oval');
+
         this.activateDrone(false);
         this.heading = 'NORTH';
     }
@@ -24,6 +28,8 @@ export default class Drone extends Phaser.Physics.Arcade.Image {
     activateDrone(on) {
         this.setActive(on);
         this.setVisible(on);
+        // this.topLeftProp.setActive(on);
+        // this.topLeftProp.setVisible(on);
     }
 
     /**

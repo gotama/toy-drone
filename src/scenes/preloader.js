@@ -11,6 +11,9 @@ import rotateLeft from '../assets/rotate_left.png';
 import rotateRight from '../assets/rotate_right.png';
 import forwardReady from '../assets/forward_ready.png';
 import forwardBlock from '../assets/forward_block.png';
+import attackButton from '../assets/attack_button.png';
+import reportButton from '../assets/report_button.png';
+import explosion from '../assets/explosion.png';
 
 /**
  * Preloading assets
@@ -40,6 +43,9 @@ export default class Preloader extends Phaser.Scene {
         this.load.image('rotate_right', rotateRight);
         this.load.image('forward_ready', forwardReady);
         this.load.image('forward_block', forwardBlock);
+        this.load.image('attack_button', attackButton);
+        this.load.image('report_button', reportButton);
+        this.load.spritesheet('boom', explosion, { frameWidth: 64, frameHeight: 64, endFrame: 23 });
     }
 
     /**

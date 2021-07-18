@@ -38,9 +38,6 @@ export default class Game extends Phaser.Scene {
      * @alias Phaser.Tilemaps.TilemapLayer
      */
     create() {
-        // TODO Animate drone
-        // var oval = this.add.image(32 + 16, 32 + 16, 'oval');
-
         this.world = new World(this, 8, 8);
         this.bullets = new Bullets(this);
         this.drone = new Drone(this, 0, 0, 'black_drone');

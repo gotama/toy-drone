@@ -66,10 +66,8 @@ export default class Console extends Phaser.GameObjects.Container {
             }
         }, this.scene);
 
-
         this.rotateLeftPad = this.scene.add.image(padX, padY, 'rotate_left');
         this.rotateLeftPad.setAlpha(0.5, 0.5, 0.5, 0.5);
-        this.rotateLeftPad.setInteractive();
         this.rotateLeftPad.on('pointerdown', () => {
             if (scene.animationComplete) {
                 if (scene.overlay.placingDrone) {
@@ -97,9 +95,9 @@ export default class Console extends Phaser.GameObjects.Container {
 
         this.rotateRightPad = this.scene.add.image(padX * 3, padY, 'rotate_right');
         this.rotateRightPad.setAlpha(0.5, 0.5, 0.5, 0.5);
-        this.rotateRightPad.setInteractive();
         this.rotateRightPad.on('pointerdown', () => {
             if (scene.animationComplete) {
+                console.log('placingDrone: ', scene.overlay.placingDrone);
                 if (scene.overlay.placingDrone) {
                     scene.overlay.drone.angle = scene.overlay.drone.getRotateAngle(90);
                     this.updateForwardButton(scene, true);
@@ -126,7 +124,6 @@ export default class Console extends Phaser.GameObjects.Container {
         this.moveForwardPad = this.scene.add.image(padX * 2, padY - padX, 'forward_block');
         this.moveForwardPad.setAlpha(0.5, 0.5, 0.5, 0.5);
         this.moveForward = false;
-        this.moveForwardPad.setInteractive();
         this.moveForwardPad.on('pointerdown', () => {
             if (scene.animationComplete) {
                 if (this.moveForward) {
@@ -168,9 +165,9 @@ export default class Console extends Phaser.GameObjects.Container {
             }
         }, this.scene);
 
-        const attackButton = this.scene.add.circle(320, 570, 20, 0x000000);
-        attackButton.setInteractive();
-        attackButton.on('pointerdown', () => {
+        this.attackButton = this.scene.add.image(320, 570, 'attack_button');
+        this.attackButton.setAlpha(0.5, 0.5, 0.5, 0.5);
+        this.attackButton.on('pointerdown', () => {
             if (scene.animationComplete) {
                 let xMove = scene.drone.x;
                 let yMove = scene.drone.y;
@@ -190,6 +187,7 @@ export default class Console extends Phaser.GameObjects.Container {
                 }
                 const targetTile = scene.world.getTileAtXY(xMove, yMove);
                 if (targetTile && !targetTile.canCollide) {
+                    this.updateText('BOMBS AWAY!!');
                     scene.bullets.fireBullet(
                         scene.drone.x, scene.drone.y,
                         scene.drone.angle,
@@ -198,27 +196,16 @@ export default class Console extends Phaser.GameObjects.Container {
             }
         }, this.scene);
 
-        const reportButton = this.scene.add.circle(270, 640, 20, 0x000000);
-        reportButton.setInteractive();
-        reportButton.on('pointerdown', () => {
+        this.reportButton = this.scene.add.image(270, 640, 'report_button');
+        this.reportButton.setAlpha(0.5, 0.5, 0.5, 0.5);
+        this.reportButton.on('pointerdown', () => {
             const tile = scene.world.getTileAtXY(this.scene.drone.x, this.scene.drone.y);
-            const reportCard = {
-                direction: scene.drone.heading,
-                x: tile.x,
-                y: tile.y,
-            };
-
-            console.log('reportButton: ', reportCard);
-            // const debugGraphics = this.add.graphics().setAlpha(0.7);
-            // layer.renderDebug(debugGraphics, {
-            //     tileColor: null,
-            //     collidingTileColor: new Phaser.Display.Color(243, 234, 48, 255),
-            //     faceColor: new Phaser.Display.Color(40, 39, 37, 255)
-            // });
+            this.updateText(`Drone Report\nHeading: ${scene.drone.heading}\nCoordinates: x${tile.x} y${tile.y}`);
         }, this.scene);
     }
 
     /**
+     * Sets the text on the users console output
      * @param  {string} text
      */
     updateText(text) {
@@ -226,17 +213,40 @@ export default class Console extends Phaser.GameObjects.Container {
     }
 
     /**
+     * Specific control over the buttons to ensure business requirement is met.
      * @param  {boolean} on
      */
     activateDroneControls(on) {
         if (on) {
             this.rotateLeftPad.setAlpha(1, 1, 1, 1);
+            this.rotateLeftPad.setInteractive();
+
             this.rotateRightPad.setAlpha(1, 1, 1, 1);
+            this.rotateRightPad.setInteractive();
+
             this.moveForwardPad.setAlpha(1, 1, 1, 1);
+            this.moveForwardPad.setInteractive();
+
+            this.reportButton.setAlpha(1, 1, 1, 1);
+            this.reportButton.setInteractive();
+
+            this.attackButton.setAlpha(1, 1, 1, 1);
+            this.attackButton.setInteractive();
         } else {
             this.rotateLeftPad.setAlpha(0.5, 0.5, 0.5, 0.5);
+            this.rotateLeftPad.setInteractive();
+
             this.rotateRightPad.setAlpha(0.5, 0.5, 0.5, 0.5);
+            this.rotateRightPad.setInteractive();
+
             this.moveForwardPad.setAlpha(0.5, 0.5, 0.5, 0.5);
+            this.moveForwardPad.disableInteractive();
+
+            this.reportButton.setAlpha(0.5, 0.5, 0.5, 0.5);
+            this.reportButton.disableInteractive();
+
+            this.attackButton.setAlpha(0.5, 0.5, 0.5, 0.5);
+            this.attackButton.disableInteractive();
         }
     }
 
