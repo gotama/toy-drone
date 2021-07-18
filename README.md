@@ -2,7 +2,7 @@
 
 This is my first game built in Phaser 3, a vast library with loads of examples.  Definitely an enjoyable experience using the power of JavaScript.
 
-I am hosting the production build on a unused webhosting that I own. The site is a static [Hugo](https://gohugo.io/) website.
+I am hosting the production build on an unused webhosting that I own. The site is a static [Hugo](https://gohugo.io/) website.
 ## [Here Be The Game](https://rundun.co.za/game)
 
 --------------------
